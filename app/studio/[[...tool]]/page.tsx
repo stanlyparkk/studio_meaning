@@ -1,11 +1,5 @@
-import dynamic from "next/dynamic";
-
 import { isSanityConfigured } from "@/lib/sanity/env";
-
-const StudioClient = dynamic(
-  () => import("@/components/studio-client").then((mod) => mod.StudioClient),
-  { ssr: false },
-);
+import { StudioClient } from "@/components/studio-client";
 
 export default function StudioPage() {
   if (!isSanityConfigured) {
