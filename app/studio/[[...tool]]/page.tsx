@@ -1,9 +1,11 @@
-import { NextStudio } from "next-sanity/studio";
+import dynamic from "next/dynamic";
 
 import { isSanityConfigured } from "@/lib/sanity/env";
-import config from "@/sanity.config";
 
-export const dynamic = "force-static";
+const StudioClient = dynamic(
+  () => import("@/components/studio-client").then((mod) => mod.StudioClient),
+  { ssr: false },
+);
 
 export default function StudioPage() {
   if (!isSanityConfigured) {
@@ -24,5 +26,5 @@ export default function StudioPage() {
     );
   }
 
-  return <NextStudio config={config} />;
+  return <StudioClient />;
 }
