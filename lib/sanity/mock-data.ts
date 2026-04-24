@@ -4,7 +4,6 @@ import type {
   PortfolioItem,
   PortfolioSecondaryCategory,
   SiteSettings,
-  VideoItem,
 } from "@/lib/sanity/types";
 
 const placeholder = (seed: string) => ({
@@ -269,27 +268,6 @@ export const mockPortfolioItems: PortfolioItem[] = [
         primaryCategorySlug: "video",
       },
     ],
-    featured: true,
-  },
-];
-
-export const mockVideos: VideoItem[] = [
-  {
-    _id: "video-1",
-    title: "Garden Wedding Highlight Film",
-    description:
-      "잔잔한 음악과 함께 두 사람의 리허설, 본식, 애프터파티까지 이어지는 하이라이트 필름",
-    youtubeUrl: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
-    coverImage: placeholder("garden wedding video"),
-    featured: true,
-  },
-  {
-    _id: "video-2",
-    title: "Jeju Pre-Wedding Teaser",
-    description:
-      "바람과 햇빛, 옷자락의 움직임을 중심으로 편집한 감성 티저 영상",
-    youtubeUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
-    coverImage: placeholder("jeju teaser video"),
     featured: true,
   },
 ];

@@ -4,7 +4,6 @@ import {
   mockPrimaryCategories,
   mockSecondaryCategories,
   mockSiteSettings,
-  mockVideos,
 } from "@/lib/sanity/mock-data";
 import {
   packagesQuery,
@@ -13,7 +12,6 @@ import {
   portfolioSecondaryCategoriesQuery,
   portfoliosQuery,
   siteSettingsQuery,
-  videosQuery,
 } from "@/lib/sanity/queries";
 import type {
   PackagePlan,
@@ -21,7 +19,6 @@ import type {
   PortfolioPrimaryCategory,
   PortfolioSecondaryCategory,
   SiteSettings,
-  VideoItem,
 } from "@/lib/sanity/types";
 import { sanityClient } from "@/lib/sanity/client";
 import { isSanityConfigured } from "@/lib/sanity/env";
@@ -83,15 +80,6 @@ export async function getPortfolioItemBySlug(slug: string) {
     { slug },
     fallback,
   );
-}
-
-export async function getVideos() {
-  return safeFetch<VideoItem[]>(videosQuery, {}, mockVideos);
-}
-
-export async function getFeaturedVideos() {
-  const items = await getVideos();
-  return items.filter((item) => item.featured).slice(0, 2);
 }
 
 export async function getPackages() {

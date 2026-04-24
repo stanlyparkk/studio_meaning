@@ -20,7 +20,6 @@ Studio에서 아래 문서를 생성해 주세요.
 - `Portfolio Primary Category` 여러 개
 - `Portfolio Secondary Category` 여러 개
 - `Portfolio` 여러 개
-- `Video` 여러 개
 - `Package / Price` 여러 개
 
 `Site Settings`는 사이트 전체 공통 정보라서 보통 1개만 운영합니다.
@@ -77,14 +76,6 @@ Studio에서 아래 문서를 생성해 주세요.
 - 갤러리 이미지 여러 장
 - 대분류
 - 중분류
-- 메인 노출 여부
-
-### Video
-
-- 영상 제목
-- 영상 설명
-- 유튜브 URL
-- 영상 대표 이미지
 - 메인 노출 여부
 
 ### Package / Price

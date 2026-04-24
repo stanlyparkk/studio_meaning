@@ -93,15 +93,6 @@ export type PortfolioItem = {
   featured?: boolean;
 };
 
-export type VideoItem = {
-  _id: string;
-  title: string;
-  description: string;
-  youtubeUrl: string;
-  coverImage: SanityImage;
-  featured?: boolean;
-};
-
 export type PackagePlan = {
   _id: string;
   title: string;

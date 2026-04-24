@@ -130,20 +130,6 @@ export const portfolioBySlugQuery = groq`
   }
 `;
 
-export const videosQuery = groq`
-  *[_type == "videoEntry"] | order(featured desc, _createdAt desc){
-    _id,
-    title,
-    description,
-    youtubeUrl,
-    coverImage{
-      alt,
-      asset
-    },
-    featured
-  }
-`;
-
 export const packagesQuery = groq`
   *[_type == "packagePlan"] | order(order asc, _createdAt asc){
     _id,
