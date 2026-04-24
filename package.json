@@ -2,6 +2,7 @@
   "name": "wedding-portfolio-next-sanity",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.5.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,12 +12,16 @@
   "dependencies": {
     "@sanity/image-url": "^1.1.0",
     "@sanity/icons": "^3.7.4",
-    "@sanity/vision": "^3.7.4",
+    "@sanity/vision": "^4.0.0",
     "next": "^15.3.0",
     "next-sanity": "^10.0.16",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "sanity": "^3.68.3"
+    "sanity": "^4.20.1"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
