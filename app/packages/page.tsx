@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { SectionHeading } from "@/components/ui/section-heading";
-import { getPackages } from "@/lib/sanity/fetchers";
+import { PageIntro } from "@/components/ui/page-intro";
+import { getPackages, getSiteSettings } from "@/lib/sanity/fetchers";
 import { buildMetadata } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
@@ -12,19 +12,29 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function PackagesPage() {
-  const packages = await getPackages();
+  const [settings, packages] = await Promise.all([getSiteSettings(), getPackages()]);
+  const showCustomQuote =
+    settings.packageCustomQuoteEnabled &&
+    (settings.packageCustomQuoteEyebrow?.trim() || settings.packageCustomQuoteTitle?.trim());
 
   return (
-    <div className="container-shell py-14 lg:py-24">
-      <SectionHeading
+    <div className="page-shell">
+      <PageIntro
         eyebrow="Package / Price"
-        title="필요한 구성에 맞춰 선택하는 촬영 패키지"
-        description="가격과 포함 항목은 Sanity Studio에서 손쉽게 수정할 수 있으며, 시즌별 프로모션도 바로 반영할 수 있습니다."
+        title={settings.packageTitle || "필요한 구성에 맞춰 선택하는 촬영 패키지"}
+        description={
+          settings.packageDescription ||
+          "가격과 포함 항목은 Sanity Studio에서 손쉽게 수정할 수 있으며, 시즌별 프로모션도 바로 반영할 수 있습니다."
+        }
       />
 
       <div className="mt-12 grid gap-6 lg:grid-cols-3">
         {packages.map((pkg) => (
-          <article key={pkg._id} className="glass-card flex h-full flex-col p-8">
+          <article
+            key={pkg._id}
+            className="page-panel flex h-full flex-col overflow-hidden p-8 transition duration-300 hover:-translate-y-1"
+          >
+            <div className="mb-6 h-px w-full bg-gradient-to-r from-gold/70 via-[#edd7b0] to-transparent" />
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-serif text-3xl text-stone">{pkg.title}</h2>
               {pkg.badge ? (
@@ -45,17 +55,25 @@ export default async function PackagesPage() {
         ))}
       </div>
 
-      <div className="glass-card mt-12 flex flex-col gap-5 p-8 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">Custom Quote</p>
-          <h3 className="mt-3 font-serif text-3xl text-stone">
-            예식 일정과 장소에 맞춘 맞춤 견적도 가능합니다
-          </h3>
+      {showCustomQuote ? (
+        <div className="page-panel mt-12 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            {settings.packageCustomQuoteEyebrow ? (
+              <p className="text-xs uppercase tracking-[0.3em] text-gold">
+                {settings.packageCustomQuoteEyebrow}
+              </p>
+            ) : null}
+            {settings.packageCustomQuoteTitle ? (
+              <h3 className="mt-3 font-serif text-3xl text-stone">
+                {settings.packageCustomQuoteTitle}
+              </h3>
+            ) : null}
+          </div>
+          <Link href="/contact" className="gold-button">
+            Contact
+          </Link>
         </div>
-        <Link href="/contact" className="gold-button">
-          Contact
-        </Link>
-      </div>
+      ) : null}
     </div>
   );
 }

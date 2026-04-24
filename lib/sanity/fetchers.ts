@@ -1,22 +1,25 @@
 import {
-  mockCategories,
   mockPackages,
   mockPortfolioItems,
+  mockPrimaryCategories,
+  mockSecondaryCategories,
   mockSiteSettings,
   mockVideos,
 } from "@/lib/sanity/mock-data";
 import {
   packagesQuery,
   portfolioBySlugQuery,
-  portfolioCategoriesQuery,
+  portfolioPrimaryCategoriesQuery,
+  portfolioSecondaryCategoriesQuery,
   portfoliosQuery,
   siteSettingsQuery,
   videosQuery,
 } from "@/lib/sanity/queries";
 import type {
   PackagePlan,
-  PortfolioCategory,
   PortfolioItem,
+  PortfolioPrimaryCategory,
+  PortfolioSecondaryCategory,
   SiteSettings,
   VideoItem,
 } from "@/lib/sanity/types";
@@ -47,11 +50,19 @@ export async function getSiteSettings() {
   return safeFetch<SiteSettings>(siteSettingsQuery, {}, mockSiteSettings);
 }
 
-export async function getPortfolioCategories() {
-  return safeFetch<PortfolioCategory[]>(
-    portfolioCategoriesQuery,
+export async function getPortfolioPrimaryCategories() {
+  return safeFetch<PortfolioPrimaryCategory[]>(
+    portfolioPrimaryCategoriesQuery,
     {},
-    mockCategories,
+    mockPrimaryCategories,
+  );
+}
+
+export async function getPortfolioSecondaryCategories() {
+  return safeFetch<PortfolioSecondaryCategory[]>(
+    portfolioSecondaryCategoriesQuery,
+    {},
+    mockSecondaryCategories,
   );
 }
 

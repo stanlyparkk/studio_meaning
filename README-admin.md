@@ -17,7 +17,8 @@
 Studio에서 아래 문서를 생성해 주세요.
 
 - `Site Settings` 1개
-- `Portfolio Category` 여러 개
+- `Portfolio Primary Category` 여러 개
+- `Portfolio Secondary Category` 여러 개
 - `Portfolio` 여러 개
 - `Video` 여러 개
 - `Package / Price` 여러 개
@@ -31,18 +32,35 @@ Studio에서 아래 문서를 생성해 주세요.
 - 브랜드명
 - 메인 배너 문구
 - 메인 대표 이미지
+- 메인 이미지 위 분위기 카드 표시 여부
+- 메인 이미지 위 분위기 카드 제목/설명
 - 메인 소개글
+- 메인 통계 영역 표시 여부
+- 메인 통계 항목
 - About 소개글
+- About 하단 강조 문구 카드 추가/삭제/수정
+- Portfolio 페이지 제목/설명
+- Package 페이지 제목/설명
+- Package 하단 맞춤 견적 영역 표시/문구
+- Contact 진행 안내 제목
+- Contact 진행 안내 단계 추가/삭제/수정
 - 연락처
 - 이메일
 - 주소
 - 인스타그램 링크
 - 카카오톡 상담 링크
 
-### Portfolio Category
+### Portfolio Primary Category
 
-- 포트폴리오 분류명
+- 대분류명
 - 슬러그
+- 설명
+
+### Portfolio Secondary Category
+
+- 중분류명
+- 슬러그
+- 연결 대분류
 - 설명
 
 ### Portfolio
@@ -50,12 +68,15 @@ Studio에서 아래 문서를 생성해 주세요.
 - 제목
 - 슬러그
 - 목록용 짧은 설명
+- 콘텐츠 유형(사진/영상)
+- 유튜브 링크
 - 상세 설명
 - 촬영일
 - 촬영 장소
 - 대표 이미지
 - 갤러리 이미지 여러 장
-- 연결할 카테고리
+- 대분류
+- 중분류
 - 메인 노출 여부
 
 ### Video

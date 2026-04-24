@@ -8,16 +8,14 @@ const navigation = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/videos", label: "Video" },
   { href: "/packages", label: "Package" },
   { href: "/contact", label: "Contact" },
-  { href: "/studio", label: "Studio" },
 ];
 
 function linkClass(isActive: boolean) {
   return isActive
-    ? "text-stone after:w-full"
-    : "text-stone/70 after:w-0 hover:text-stone hover:after:w-full";
+    ? "text-stone"
+    : "text-stone/70 hover:text-stone";
 }
 
 export function Header({ brandName }: { brandName: string }) {
@@ -29,13 +27,16 @@ export function Header({ brandName }: { brandName: string }) {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/50 bg-[#faf5ed]/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/50 bg-[#faf5ed]/84 backdrop-blur-xl">
       <div className="container-shell flex h-20 items-center justify-between">
-        <Link href="/" className="text-[1.35rem] font-semibold tracking-[0.28em] text-stone">
+        <Link
+          href="/"
+          className="font-serif text-[1.55rem] font-semibold tracking-[0.18em] text-stone"
+        >
           {brandName}
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-3 rounded-full border border-white/75 bg-white/52 px-3 py-2 shadow-soft lg:flex">
           {navigation.map((item) => {
             const isActive =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -44,7 +45,9 @@ export function Header({ brandName }: { brandName: string }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative pb-1 text-sm tracking-[0.24em] uppercase after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold after:transition-all ${linkClass(isActive)}`}
+                className={`relative rounded-full px-4 py-2 text-sm tracking-[0.2em] uppercase transition ${linkClass(isActive)} ${
+                  isActive ? "bg-[#f5e4c8]/82" : ""
+                }`}
               >
                 {item.label}
               </Link>
@@ -55,7 +58,7 @@ export function Header({ brandName }: { brandName: string }) {
         <button
           type="button"
           onClick={() => setOpen((prev) => !prev)}
-          className="flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border border-stone/20 bg-white/60 lg:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border border-stone/20 bg-white/68 shadow-soft lg:hidden"
           aria-label="메뉴 열기"
           aria-expanded={open}
         >

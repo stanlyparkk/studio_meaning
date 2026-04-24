@@ -1,4 +1,4 @@
-import { ImageIcon } from "@sanity/icons";
+import { ImageIcon, PlayIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const portfolioType = defineType({
@@ -31,6 +31,33 @@ export const portfolioType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "mediaType",
+      title: "콘텐츠 유형",
+      type: "string",
+      initialValue: "photo",
+      options: {
+        list: [
+          { title: "사진", value: "photo" },
+          { title: "영상", value: "video" },
+        ],
+        layout: "radio",
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "youtubeUrl",
+      title: "유튜브 링크",
+      type: "url",
+      hidden: ({ document }) => document?.mediaType !== "video",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (context.document?.mediaType === "video" && !value) {
+            return "영상 포트폴리오에는 유튜브 링크가 필요합니다.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
       name: "description",
       title: "상세 설명",
       type: "text",
@@ -53,6 +80,7 @@ export const portfolioType = defineType({
       name: "coverImage",
       title: "대표 이미지",
       type: "image",
+      description: "영상 포트폴리오에서는 비워두면 유튜브 썸네일이 사용됩니다.",
       options: {
         hotspot: true,
       },
@@ -63,7 +91,13 @@ export const portfolioType = defineType({
           type: "string",
         }),
       ],
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (context.document?.mediaType === "photo" && !value) {
+            return "사진 포트폴리오에는 대표 이미지가 필요합니다.";
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "gallery",
@@ -84,16 +118,30 @@ export const portfolioType = defineType({
           ],
         }),
       ],
-      validation: (rule) => rule.min(2).required(),
+      hidden: ({ document }) => document?.mediaType !== "photo",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (context.document?.mediaType === "photo" && (!value || value.length < 2)) {
+            return "사진 포트폴리오에는 최소 2장의 갤러리가 필요합니다.";
+          }
+          return true;
+        }),
     }),
     defineField({
-      name: "categories",
-      title: "포트폴리오 카테고리",
+      name: "primaryCategory",
+      title: "대분류",
+      type: "reference",
+      to: [{ type: "portfolioPrimaryCategory" }],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "secondaryCategories",
+      title: "중분류",
       type: "array",
       of: [
         defineArrayMember({
           type: "reference",
-          to: [{ type: "portfolioCategory" }],
+          to: [{ type: "portfolioSecondaryCategory" }],
         }),
       ],
     }),
@@ -104,4 +152,20 @@ export const portfolioType = defineType({
       initialValue: true,
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "mediaType",
+      media: "coverImage",
+    },
+    prepare({ title, subtitle, media }) {
+      const mappedSubtitle =
+        subtitle === "video" ? "영상 포트폴리오" : "사진 포트폴리오";
+      return {
+        title,
+        subtitle: mappedSubtitle,
+        media: media || (subtitle === "video" ? PlayIcon : ImageIcon),
+      };
+    },
+  },
 });

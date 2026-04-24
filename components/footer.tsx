@@ -13,15 +13,33 @@ export function Footer({ settings }: { settings: SiteSettings }) {
   }
 
   return (
-    <footer className="border-t border-stone/10 bg-[#f7f0e6]/60">
-      <div className="container-shell grid gap-10 py-14 md:grid-cols-[1.3fr_1fr]">
+    <footer className="border-t border-stone/10 bg-[linear-gradient(180deg,rgba(247,240,230,0.42),rgba(243,231,212,0.72))]">
+      <div className="container-shell grid gap-10 py-14 md:grid-cols-[1.35fr_1fr]">
         <div>
-          <p className="text-[1.25rem] font-semibold tracking-[0.24em] text-stone">
+          <p className="text-[1.3rem] font-semibold tracking-[0.24em] text-stone">
             {settings.brandName}
           </p>
           <p className="mt-4 max-w-xl text-sm leading-7 text-stone/70">
             {settings.bannerSubtitle}
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href={settings.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="soft-chip"
+            >
+              Instagram
+            </a>
+            <a
+              href={settings.kakaoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="soft-chip"
+            >
+              KakaoTalk
+            </a>
+          </div>
         </div>
 
         <div className="grid gap-3 text-sm text-stone/70">
@@ -39,12 +57,9 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             <Link href="/packages" className="hover:text-stone">
               Package
             </Link>
-            <a href={settings.instagramUrl} target="_blank" rel="noreferrer" className="hover:text-stone">
-              Instagram
-            </a>
-            <a href={settings.kakaoUrl} target="_blank" rel="noreferrer" className="hover:text-stone">
-              KakaoTalk
-            </a>
+            <Link href="/contact" className="hover:text-stone">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

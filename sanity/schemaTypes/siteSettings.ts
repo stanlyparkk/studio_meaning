@@ -43,6 +43,25 @@ export const siteSettingsType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "homeMoodEnabled",
+      title: "메인 이미지 위 분위기 카드 표시",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "homeMoodTitle",
+      title: "분위기 카드 제목",
+      type: "string",
+      hidden: ({ document }) => !document?.homeMoodEnabled,
+    }),
+    defineField({
+      name: "homeMoodText",
+      title: "분위기 카드 설명",
+      type: "text",
+      rows: 3,
+      hidden: ({ document }) => !document?.homeMoodEnabled,
+    }),
+    defineField({
       name: "introTitle",
       title: "메인 소개 제목",
       type: "string",
@@ -54,6 +73,45 @@ export const siteSettingsType = defineType({
       type: "text",
       rows: 5,
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "homeStatsEnabled",
+      title: "메인 통계 영역 표시",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "homeStats",
+      title: "메인 통계 항목",
+      type: "array",
+      hidden: ({ document }) => !document?.homeStatsEnabled,
+      of: [
+        {
+          type: "object",
+          name: "homeStat",
+          fields: [
+            defineField({
+              name: "value",
+              title: "큰 텍스트",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "label",
+              title: "보조 문구",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: "value",
+              subtitle: "label",
+            },
+          },
+        },
+      ],
+      validation: (rule) => rule.max(4),
     }),
     defineField({
       name: "aboutTitle",
@@ -69,6 +127,70 @@ export const siteSettingsType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "aboutHighlights",
+      title: "About 하단 강조 문구 카드",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "aboutHighlight",
+          fields: [
+            defineField({
+              name: "text",
+              title: "문구",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: "text",
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: "portfolioTitle",
+      title: "Portfolio 페이지 제목",
+      type: "string",
+    }),
+    defineField({
+      name: "portfolioDescription",
+      title: "Portfolio 페이지 설명",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "packageTitle",
+      title: "Package 페이지 제목",
+      type: "string",
+    }),
+    defineField({
+      name: "packageDescription",
+      title: "Package 페이지 설명",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "packageCustomQuoteEnabled",
+      title: "Package 하단 맞춤 견적 영역 표시",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "packageCustomQuoteEyebrow",
+      title: "맞춤 견적 영역 상단 문구",
+      type: "string",
+      hidden: ({ document }) => !document?.packageCustomQuoteEnabled,
+    }),
+    defineField({
+      name: "packageCustomQuoteTitle",
+      title: "맞춤 견적 영역 제목",
+      type: "string",
+      hidden: ({ document }) => !document?.packageCustomQuoteEnabled,
+    }),
+    defineField({
       name: "contactHeading",
       title: "Contact 제목",
       type: "string",
@@ -80,6 +202,42 @@ export const siteSettingsType = defineType({
       type: "text",
       rows: 4,
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "contactStepsTitle",
+      title: "Contact 진행 안내 제목",
+      type: "string",
+    }),
+    defineField({
+      name: "contactSteps",
+      title: "Contact 진행 안내 단계",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "contactStep",
+          fields: [
+            defineField({
+              name: "title",
+              title: "단계 제목",
+              type: "string",
+            }),
+            defineField({
+              name: "text",
+              title: "설명",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: "title",
+              subtitle: "text",
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: "phone",
@@ -113,7 +271,7 @@ export const siteSettingsType = defineType({
     prepare() {
       return {
         title: "Site Settings",
-        subtitle: "홈 배너, 소개글, 연락처를 관리합니다.",
+        subtitle: "홈 배너, 소개글, 통계, 연락처를 관리합니다.",
       };
     },
   },

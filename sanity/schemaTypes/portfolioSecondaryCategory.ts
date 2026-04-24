@@ -1,15 +1,15 @@
 import { TagIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
-export const portfolioCategoryType = defineType({
-  name: "portfolioCategory",
-  title: "Portfolio Category",
+export const portfolioSecondaryCategoryType = defineType({
+  name: "portfolioSecondaryCategory",
+  title: "Portfolio Secondary Category",
   type: "document",
   icon: TagIcon,
   fields: [
     defineField({
       name: "title",
-      title: "카테고리명",
+      title: "중분류명",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -21,6 +21,13 @@ export const portfolioCategoryType = defineType({
         source: "title",
         maxLength: 96,
       },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "primaryCategory",
+      title: "연결 대분류",
+      type: "reference",
+      to: [{ type: "portfolioPrimaryCategory" }],
       validation: (rule) => rule.required(),
     }),
     defineField({
