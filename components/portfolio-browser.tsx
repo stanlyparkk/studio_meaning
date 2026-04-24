@@ -199,12 +199,12 @@ export function PortfolioBrowser({
                 >
                   <div className="relative">
                     <PortfolioVideoThumbnail item={item} youtubeId={youtubeId} />
-                    <div className="absolute inset-0 flex items-center justify-center rounded-[2rem] bg-black/12 transition group-hover:bg-black/24">
+                    <div className="absolute inset-0 flex items-center justify-center rounded-[2rem] bg-black/10 transition group-hover:bg-black/25">
                       <span className="rounded-full bg-white/90 px-5 py-3 text-xs uppercase tracking-[0.28em] text-stone shadow-soft">
                         Video Preview
                       </span>
                     </div>
-                    <div className="absolute left-4 top-4 rounded-full bg-[#f4e2c6]/92 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-gold">
+                    <div className="absolute left-4 top-4 rounded-full bg-[#f4e2c6]/90 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-gold">
                       Video
                     </div>
                   </div>
@@ -230,7 +230,7 @@ export function PortfolioBrowser({
                   {item.secondaryCategories.map((category) => (
                     <span
                       key={`${item._id}-${category.slug}`}
-                      className="rounded-full bg-white/72 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-stone/70"
+                      className="rounded-full bg-white/70 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-stone/70"
                     >
                       {category.title}
                     </span>

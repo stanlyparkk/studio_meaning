@@ -36,7 +36,7 @@ export function Header({ brandName }: { brandName: string }) {
           {brandName}
         </Link>
 
-        <nav className="hidden items-center gap-3 rounded-full border border-white/75 bg-white/52 px-3 py-2 shadow-soft lg:flex">
+        <nav className="hidden items-center gap-3 rounded-full border border-white/70 bg-white/60 px-3 py-2 shadow-soft lg:flex">
           {navigation.map((item) => {
             const isActive =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -46,7 +46,7 @@ export function Header({ brandName }: { brandName: string }) {
                 key={item.href}
                 href={item.href}
                 className={`relative rounded-full px-4 py-2 text-sm tracking-[0.2em] uppercase transition ${linkClass(isActive)} ${
-                  isActive ? "bg-[#f5e4c8]/82" : ""
+                  isActive ? "bg-[#f5e4c8]/80" : ""
                 }`}
               >
                 {item.label}
@@ -58,7 +58,7 @@ export function Header({ brandName }: { brandName: string }) {
         <button
           type="button"
           onClick={() => setOpen((prev) => !prev)}
-          className="flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border border-stone/20 bg-white/68 shadow-soft lg:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-1 rounded-full border border-stone/20 bg-white/70 shadow-soft lg:hidden"
           aria-label="메뉴 열기"
           aria-expanded={open}
         >

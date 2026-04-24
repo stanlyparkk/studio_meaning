@@ -67,7 +67,7 @@ body {
   }
 
   .soft-chip {
-    @apply rounded-full border border-stone/15 bg-white/72 px-4 py-2 text-xs uppercase tracking-[0.24em] text-stone/72 transition;
+    @apply rounded-full border border-stone/20 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.24em] text-stone/70 transition;
   }
 
   .soft-chip-active {
@@ -75,6 +75,6 @@ body {
   }
 
   .page-panel {
-    @apply rounded-[2.25rem] border border-white/70 bg-white/58 p-6 shadow-soft backdrop-blur-xl sm:p-8;
+    @apply rounded-[2.25rem] border border-white/70 bg-white/60 p-6 shadow-soft backdrop-blur-xl sm:p-8;
   }
 }

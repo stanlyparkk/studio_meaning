@@ -75,7 +75,7 @@ export default async function HomePage() {
           {homeStats.length ? (
             <div className="page-panel grid gap-6 p-8 sm:grid-cols-3">
               {homeStats.map((item) => (
-                <div key={`${item.value}-${item.label}`} className="rounded-[1.5rem] bg-white/58 p-5">
+                <div key={`${item.value}-${item.label}`} className="rounded-[1.5rem] bg-white/60 p-5">
                   <p className="font-serif text-4xl text-gold">{item.value}</p>
                   <p className="mt-2 text-sm uppercase tracking-[0.24em] text-stone/70">
                     {item.label}
