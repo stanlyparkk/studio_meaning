@@ -17,7 +17,9 @@ export default async function AboutPage() {
     getPortfolioItems(),
   ]);
 
-  const highlighted = portfolios.slice(0, 2);
+  const highlighted = portfolios
+    .filter((item) => item.mediaType === "photo")
+    .slice(0, 2);
   const aboutHighlights =
     settings.aboutHighlights?.filter((item) => item.text?.trim()) || [];
 
