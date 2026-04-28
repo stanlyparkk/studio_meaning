@@ -17,6 +17,7 @@ export const portfolioType = defineType({
       name: "slug",
       title: "슬러그",
       type: "slug",
+      description: "제목을 입력한 뒤 Generate 버튼을 눌러 생성하세요. 상세 페이지 주소에 사용됩니다.",
       options: {
         source: "title",
         maxLength: 96,

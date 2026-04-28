@@ -70,7 +70,7 @@ export const portfoliosQuery = groq`
   *[_type == "portfolio"] | order(featured desc, shootDate desc){
     _id,
     title,
-    "slug": slug.current,
+    "slug": coalesce(slug.current, _id),
     summary,
     description,
     shootDate,
@@ -99,10 +99,10 @@ export const portfoliosQuery = groq`
 `;
 
 export const portfolioBySlugQuery = groq`
-  *[_type == "portfolio" && slug.current == $slug][0]{
+  *[_type == "portfolio" && (slug.current == $slug || _id == $slug)][0]{
     _id,
     title,
-    "slug": slug.current,
+    "slug": coalesce(slug.current, _id),
     summary,
     description,
     shootDate,

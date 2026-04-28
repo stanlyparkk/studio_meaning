@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PortableImage } from "@/components/ui/portable-image";
-import { getPortfolioItemBySlug, getPortfolioItems } from "@/lib/sanity/fetchers";
+import { getPortfolioItemBySlug } from "@/lib/sanity/fetchers";
 import { buildMetadata, extractYouTubeId, formatDate } from "@/lib/utils";
 
 type PageProps = {
@@ -11,10 +11,8 @@ type PageProps = {
   }>;
 };
 
-export async function generateStaticParams() {
-  const items = await getPortfolioItems();
-  return items.map((item) => ({ slug: item.slug }));
-}
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
