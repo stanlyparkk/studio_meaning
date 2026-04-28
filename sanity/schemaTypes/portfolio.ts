@@ -1,6 +1,8 @@
 import { ImageIcon, PlayIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { slugify } from "./slugify";
+
 export const portfolioType = defineType({
   name: "portfolio",
   title: "Portfolio",
@@ -20,6 +22,7 @@ export const portfolioType = defineType({
       description: "제목을 입력한 뒤 Generate 버튼을 눌러 생성하세요. 상세 페이지 주소에 사용됩니다.",
       options: {
         source: "title",
+        slugify,
         maxLength: 96,
       },
       validation: (rule) => rule.required(),

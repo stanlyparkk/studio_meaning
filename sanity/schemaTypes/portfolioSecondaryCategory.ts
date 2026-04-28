@@ -1,6 +1,8 @@
 import { TagIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
+import { slugify } from "./slugify";
+
 export const portfolioSecondaryCategoryType = defineType({
   name: "portfolioSecondaryCategory",
   title: "Portfolio Secondary Category",
@@ -19,6 +21,7 @@ export const portfolioSecondaryCategoryType = defineType({
       type: "slug",
       options: {
         source: "title",
+        slugify,
         maxLength: 96,
       },
       validation: (rule) => rule.required(),
