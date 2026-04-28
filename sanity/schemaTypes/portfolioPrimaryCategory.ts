@@ -24,7 +24,6 @@ export const portfolioPrimaryCategoryType = defineType({
         slugify,
         maxLength: 96,
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",

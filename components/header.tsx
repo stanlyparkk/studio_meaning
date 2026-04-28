@@ -18,7 +18,7 @@ function linkClass(isActive: boolean) {
     : "text-stone/70 hover:text-stone";
 }
 
-export function Header({ brandName }: { brandName: string }) {
+export function Header({ brandName }: { brandName?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -33,7 +33,7 @@ export function Header({ brandName }: { brandName: string }) {
           href="/"
           className="font-serif text-[1.55rem] font-semibold tracking-[0.18em] text-stone"
         >
-          {brandName}
+          {brandName || "Portfolio"}
         </Link>
 
         <nav className="hidden items-center gap-3 rounded-full border border-white/70 bg-white/60 px-3 py-2 shadow-soft lg:flex">

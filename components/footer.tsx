@@ -7,6 +7,7 @@ import type { SiteSettings } from "@/lib/sanity/types";
 
 export function Footer({ settings }: { settings: SiteSettings }) {
   const pathname = usePathname();
+  const hasSocialLinks = Boolean(settings.instagramUrl || settings.kakaoUrl);
 
   if (pathname.startsWith("/studio")) {
     return null;
@@ -17,39 +18,51 @@ export function Footer({ settings }: { settings: SiteSettings }) {
       <div className="container-shell grid gap-10 py-14 md:grid-cols-[1.35fr_1fr]">
         <div>
           <p className="text-[1.3rem] font-semibold tracking-[0.24em] text-stone">
-            {settings.brandName}
+            {settings.brandName || "Portfolio"}
           </p>
-          <p className="mt-4 max-w-xl text-sm leading-7 text-stone/70">
-            {settings.bannerSubtitle}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href={settings.instagramUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="soft-chip"
-            >
-              Instagram
-            </a>
-            <a
-              href={settings.kakaoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="soft-chip"
-            >
-              KakaoTalk
-            </a>
-          </div>
+          {settings.bannerSubtitle ? (
+            <p className="mt-4 max-w-xl text-sm leading-7 text-stone/70">
+              {settings.bannerSubtitle}
+            </p>
+          ) : null}
+          {hasSocialLinks ? (
+            <div className="mt-6 flex flex-wrap gap-3">
+              {settings.instagramUrl ? (
+                <a
+                  href={settings.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="soft-chip"
+                >
+                  Instagram
+                </a>
+              ) : null}
+              {settings.kakaoUrl ? (
+                <a
+                  href={settings.kakaoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="soft-chip"
+                >
+                  KakaoTalk
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         <div className="grid gap-3 text-sm text-stone/70">
-          <a href={`tel:${settings.phone.replaceAll("-", "")}`} className="hover:text-stone">
-            {settings.phone}
-          </a>
-          <a href={`mailto:${settings.email}`} className="hover:text-stone">
-            {settings.email}
-          </a>
-          <p>{settings.address}</p>
+          {settings.phone ? (
+            <a href={`tel:${settings.phone.replaceAll("-", "")}`} className="hover:text-stone">
+              {settings.phone}
+            </a>
+          ) : null}
+          {settings.email ? (
+            <a href={`mailto:${settings.email}`} className="hover:text-stone">
+              {settings.email}
+            </a>
+          ) : null}
+          {settings.address ? <p>{settings.address}</p> : null}
           <div className="flex flex-wrap gap-4 pt-2 uppercase tracking-[0.22em]">
             <Link href="/portfolio" className="hover:text-stone">
               Portfolio

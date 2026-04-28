@@ -1,7 +1,7 @@
 type SectionHeadingProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   align?: "left" | "center";
   noWrapDesktop?: boolean;
 };
@@ -21,7 +21,7 @@ export function SectionHeading({
       <h2 className={`section-title mt-4 ${noWrapDesktop ? "lg:whitespace-nowrap" : ""}`}>
         {title}
       </h2>
-      <p className="section-copy mt-5">{description}</p>
+      {description ? <p className="section-copy mt-5">{description}</p> : null}
     </div>
   );
 }

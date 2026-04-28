@@ -24,14 +24,12 @@ export const portfolioSecondaryCategoryType = defineType({
         slugify,
         maxLength: 96,
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "primaryCategory",
       title: "연결 대분류",
       type: "reference",
       to: [{ type: "portfolioPrimaryCategory" }],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",

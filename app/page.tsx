@@ -6,9 +6,12 @@ import { getSiteSettings } from "@/lib/sanity/fetchers";
 
 export default async function HomePage() {
   const settings = await getSiteSettings();
+  const brandName = settings.brandName || "Portfolio";
+  const heroTitle = settings.bannerTitle || brandName;
   const showMoodCard =
     settings.homeMoodEnabled &&
     (settings.homeMoodTitle?.trim() || settings.homeMoodText?.trim());
+  const showIntro = Boolean(settings.introTitle?.trim() || settings.introText?.trim());
   const homeStats =
     settings.homeStatsEnabled && settings.homeStats?.length
       ? settings.homeStats.filter((item) => item.value?.trim() && item.label?.trim())
@@ -20,11 +23,13 @@ export default async function HomePage() {
         <div>
           <p className="section-kicker">Emotional Wedding Visuals</p>
           <h1 className="mt-5 max-w-3xl font-serif text-5xl leading-[1.02] text-stone sm:text-6xl lg:text-7xl">
-            {settings.bannerTitle}
+            {heroTitle}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-stone/70">
-            {settings.bannerSubtitle}
-          </p>
+          {settings.bannerSubtitle ? (
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-stone/70">
+              {settings.bannerSubtitle}
+            </p>
+          ) : null}
           <div className="mt-10 flex flex-wrap gap-4">
             <Link href="/portfolio" className="gold-button">
               Portfolio View
@@ -39,7 +44,7 @@ export default async function HomePage() {
           <div className="absolute -left-6 top-10 hidden h-52 w-52 rounded-full border border-white/70 bg-white/40 blur-2xl lg:block" />
           <PortableImage
             image={settings.heroImage}
-            alt={settings.brandName}
+            alt={brandName}
             priority
             sizes="(min-width: 1024px) 45vw, 100vw"
             className="h-[440px] sm:h-[560px] lg:h-[700px]"
@@ -61,31 +66,38 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="container-shell py-12 lg:py-20">
-        <div
-          className={`grid gap-10 lg:items-end ${
-            homeStats.length ? "lg:grid-cols-[0.9fr_1.1fr]" : ""
-          }`}
-        >
-          <SectionHeading
-            eyebrow="About The Studio"
-            title={settings.introTitle}
-            description={settings.introText}
-          />
-          {homeStats.length ? (
-            <div className="page-panel grid gap-6 p-8 sm:grid-cols-3">
-              {homeStats.map((item) => (
-                <div key={`${item.value}-${item.label}`} className="rounded-[1.5rem] bg-white/60 p-5">
-                  <p className="font-serif text-4xl text-gold">{item.value}</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.24em] text-stone/70">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      </section>
+      {showIntro || homeStats.length ? (
+        <section className="container-shell py-12 lg:py-20">
+          <div
+            className={`grid gap-10 lg:items-end ${
+              homeStats.length ? "lg:grid-cols-[0.9fr_1.1fr]" : ""
+            }`}
+          >
+            {showIntro ? (
+              <SectionHeading
+                eyebrow="About The Studio"
+                title={settings.introTitle || "About The Studio"}
+                description={settings.introText}
+              />
+            ) : null}
+            {homeStats.length ? (
+              <div className="page-panel grid gap-6 p-8 sm:grid-cols-3">
+                {homeStats.map((item) => (
+                  <div
+                    key={`${item.value}-${item.label}`}
+                    className="rounded-[1.5rem] bg-white/60 p-5"
+                  >
+                    <p className="font-serif text-4xl text-gold">{item.value}</p>
+                    <p className="mt-2 text-sm uppercase tracking-[0.24em] text-stone/70">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }

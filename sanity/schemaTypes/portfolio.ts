@@ -25,14 +25,12 @@ export const portfolioType = defineType({
         slugify,
         maxLength: 96,
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "summary",
       title: "목록용 짧은 설명",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "mediaType",
@@ -66,19 +64,16 @@ export const portfolioType = defineType({
       title: "상세 설명",
       type: "text",
       rows: 8,
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "shootDate",
       title: "촬영일",
       type: "date",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "location",
       title: "촬영 장소",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "coverImage",
@@ -130,7 +125,6 @@ export const portfolioType = defineType({
       title: "대분류",
       type: "reference",
       to: [{ type: "portfolioPrimaryCategory" }],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "secondaryCategories",

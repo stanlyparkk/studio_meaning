@@ -21,6 +21,10 @@ export const siteSettingsQuery = groq`
     },
     aboutTitle,
     aboutBody,
+    "aboutImages": coalesce(aboutImages[]{
+      alt,
+      asset
+    }, []),
     aboutHighlights[]{
       text
     },
@@ -50,7 +54,7 @@ export const portfolioPrimaryCategoriesQuery = groq`
   *[_type == "portfolioPrimaryCategory"] | order(title asc){
     _id,
     title,
-    "slug": slug.current,
+    "slug": coalesce(slug.current, _id),
     description
   }
 `;
@@ -59,9 +63,9 @@ export const portfolioSecondaryCategoriesQuery = groq`
   *[_type == "portfolioSecondaryCategory"] | order(title asc){
     _id,
     title,
-    "slug": slug.current,
+    "slug": coalesce(slug.current, _id),
     description,
-    "primaryCategorySlug": primaryCategory->slug.current,
+    "primaryCategorySlug": coalesce(primaryCategory->slug.current, primaryCategory->_id),
     "primaryCategoryTitle": primaryCategory->title
   }
 `;
@@ -87,12 +91,12 @@ export const portfoliosQuery = groq`
     }, []),
     "primaryCategory": primaryCategory->{
       title,
-      "slug": slug.current
+      "slug": coalesce(slug.current, _id)
     },
     "secondaryCategories": coalesce(secondaryCategories[]->{
       title,
-      "slug": slug.current,
-      "primaryCategorySlug": primaryCategory->slug.current
+      "slug": coalesce(slug.current, _id),
+      "primaryCategorySlug": coalesce(primaryCategory->slug.current, primaryCategory->_id)
     }, []),
     featured
   }
@@ -119,12 +123,12 @@ export const portfolioBySlugQuery = groq`
     }, []),
     "primaryCategory": primaryCategory->{
       title,
-      "slug": slug.current
+      "slug": coalesce(slug.current, _id)
     },
     "secondaryCategories": coalesce(secondaryCategories[]->{
       title,
-      "slug": slug.current,
-      "primaryCategorySlug": primaryCategory->slug.current
+      "slug": coalesce(slug.current, _id),
+      "primaryCategorySlug": coalesce(primaryCategory->slug.current, primaryCategory->_id)
     }, []),
     featured
   }
@@ -136,7 +140,7 @@ export const packagesQuery = groq`
     title,
     price,
     description,
-    features,
+    "features": coalesce(features, []),
     note,
     badge,
     order

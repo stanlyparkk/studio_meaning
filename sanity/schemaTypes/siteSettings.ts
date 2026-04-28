@@ -11,20 +11,17 @@ export const siteSettingsType = defineType({
       name: "brandName",
       title: "브랜드명",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "bannerTitle",
       title: "메인 배너 문구",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "bannerSubtitle",
       title: "메인 배너 보조 문구",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "heroImage",
@@ -40,7 +37,6 @@ export const siteSettingsType = defineType({
           type: "string",
         }),
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "homeMoodEnabled",
@@ -65,14 +61,12 @@ export const siteSettingsType = defineType({
       name: "introTitle",
       title: "메인 소개 제목",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "introText",
       title: "메인 소개글",
       type: "text",
       rows: 5,
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "homeStatsEnabled",
@@ -94,13 +88,11 @@ export const siteSettingsType = defineType({
               name: "value",
               title: "큰 텍스트",
               type: "string",
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: "label",
               title: "보조 문구",
               type: "string",
-              validation: (rule) => rule.required(),
             }),
           ],
           preview: {
@@ -117,14 +109,33 @@ export const siteSettingsType = defineType({
       name: "aboutTitle",
       title: "About 제목",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "aboutBody",
       title: "About 소개글",
       type: "text",
       rows: 8,
-      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "aboutImages",
+      title: "About 전용 이미지",
+      type: "array",
+      description: "About 페이지 오른쪽에 표시할 이미지를 등록합니다. 포트폴리오 이미지와 별도로 관리됩니다.",
+      of: [
+        {
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "대체 텍스트",
+              type: "string",
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: "aboutHighlights",
@@ -139,7 +150,6 @@ export const siteSettingsType = defineType({
               name: "text",
               title: "문구",
               type: "string",
-              validation: (rule) => rule.required(),
             }),
           ],
           preview: {
@@ -194,14 +204,12 @@ export const siteSettingsType = defineType({
       name: "contactHeading",
       title: "Contact 제목",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "contactDescription",
       title: "Contact 안내 문구",
       type: "text",
       rows: 4,
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "contactStepsTitle",
@@ -227,7 +235,6 @@ export const siteSettingsType = defineType({
               title: "설명",
               type: "text",
               rows: 3,
-              validation: (rule) => rule.required(),
             }),
           ],
           preview: {
@@ -243,13 +250,12 @@ export const siteSettingsType = defineType({
       name: "phone",
       title: "연락처",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "email",
       title: "이메일",
       type: "string",
-      validation: (rule) => rule.email().required(),
+      validation: (rule) => rule.email(),
     }),
     defineField({
       name: "address",

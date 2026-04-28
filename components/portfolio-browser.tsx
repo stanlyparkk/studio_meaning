@@ -242,11 +242,15 @@ export function PortfolioBrowser({
                     {isVideo ? "Video" : "Photo"}
                   </span>
                 </div>
-                <p className="mt-3 text-sm leading-7 text-stone/70">{item.summary}</p>
-                <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.22em] text-stone/60">
-                  <span>{item.location}</span>
-                  <span>{formatDate(item.shootDate)}</span>
-                </div>
+                {item.summary ? (
+                  <p className="mt-3 text-sm leading-7 text-stone/70">{item.summary}</p>
+                ) : null}
+                {item.location || item.shootDate ? (
+                  <div className="mt-4 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.22em] text-stone/60">
+                    {item.location ? <span>{item.location}</span> : null}
+                    {item.shootDate ? <span>{formatDate(item.shootDate)}</span> : null}
+                  </div>
+                ) : null}
                 <div className="mt-5 flex flex-wrap gap-3">
                   {isVideo ? (
                     <button

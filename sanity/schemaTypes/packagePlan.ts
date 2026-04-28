@@ -17,21 +17,18 @@ export const packagePlanType = defineType({
       name: "price",
       title: "가격",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "설명",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "features",
       title: "포함 항목",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.min(2).required(),
     }),
     defineField({
       name: "note",

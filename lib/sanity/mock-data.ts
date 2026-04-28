@@ -41,6 +41,10 @@ export const mockSiteSettings: SiteSettings = {
   aboutTitle: "사진보다 오래 남는 분위기를 기록합니다",
   aboutBody:
     "Atelier de Vow는 인위적인 포즈보다 두 사람의 결을 우선합니다. 자연광이 머무는 순간, 손끝의 떨림, 하객의 눈빛처럼 시간이 지나도 다시 꺼내 보고 싶은 장면을 정교한 색감과 구성으로 완성합니다. 본식 스냅, 프리웨딩, 브라이덜 샤워, 하이라이트 필름까지 브랜드 톤을 일관되게 설계해 드립니다.",
+  aboutImages: [
+    placeholder("about studio mood"),
+    placeholder("about detail moment"),
+  ],
   aboutHighlights: [
     {
       text: "자연광 중심의 부드러운 톤앤매너",

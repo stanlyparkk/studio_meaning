@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return buildMetadata({
     title: item.title,
-    description: item.summary,
+    description: item.summary || item.description || "포트폴리오 상세 페이지입니다.",
     path: `/portfolio/${item.slug}`,
   });
 }
@@ -40,6 +40,12 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
   if (!item) {
     notFound();
   }
+
+  const detailRows = [
+    item.shootDate ? { label: "Date", value: formatDate(item.shootDate) } : null,
+    item.location ? { label: "Location", value: item.location } : null,
+    { label: "Type", value: item.mediaType === "video" ? "Video" : "Photo" },
+  ].filter(Boolean) as { label: string; value: string }[];
 
   return (
     <div className="page-shell">
@@ -61,21 +67,19 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             ))}
           </div>
           <h1 className="mt-5 font-serif text-5xl leading-tight text-stone">{item.title}</h1>
-          <p className="mt-6 text-base leading-8 text-stone/70">{item.description}</p>
-          <dl className="page-panel mt-8 space-y-4 p-6 text-sm leading-7 text-stone/70">
-            <div>
-              <dt className="text-xs uppercase tracking-[0.26em] text-gold">Date</dt>
-              <dd>{formatDate(item.shootDate)}</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-[0.26em] text-gold">Location</dt>
-              <dd>{item.location}</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-[0.26em] text-gold">Type</dt>
-              <dd>{item.mediaType === "video" ? "Video" : "Photo"}</dd>
-            </div>
-          </dl>
+          {item.description ? (
+            <p className="mt-6 text-base leading-8 text-stone/70">{item.description}</p>
+          ) : null}
+          {detailRows.length ? (
+            <dl className="page-panel mt-8 space-y-4 p-6 text-sm leading-7 text-stone/70">
+              {detailRows.map((row) => (
+                <div key={row.label}>
+                  <dt className="text-xs uppercase tracking-[0.26em] text-gold">{row.label}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
         </div>
 
         {item.mediaType === "video" && item.youtubeUrl ? (

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export function formatDate(date: string) {
+export function formatDate(date?: string) {
   if (!date) return "";
 
   return new Intl.DateTimeFormat("ko-KR", {

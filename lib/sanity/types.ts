@@ -37,19 +37,20 @@ export type PortfolioSecondaryCategory = {
 };
 
 export type SiteSettings = {
-  brandName: string;
-  bannerTitle: string;
-  bannerSubtitle: string;
-  heroImage: SanityImage;
+  brandName?: string;
+  bannerTitle?: string;
+  bannerSubtitle?: string;
+  heroImage?: SanityImage;
   homeMoodEnabled?: boolean;
   homeMoodTitle?: string;
   homeMoodText?: string;
-  introTitle: string;
-  introText: string;
+  introTitle?: string;
+  introText?: string;
   homeStatsEnabled?: boolean;
   homeStats?: HomeStat[];
-  aboutTitle: string;
-  aboutBody: string;
+  aboutTitle?: string;
+  aboutBody?: string;
+  aboutImages?: SanityImage[];
   aboutHighlights?: SimpleTextCard[];
   portfolioTitle?: string;
   portfolioDescription?: string;
@@ -60,23 +61,23 @@ export type SiteSettings = {
   packageCustomQuoteTitle?: string;
   contactStepsTitle?: string;
   contactSteps?: StepItem[];
-  contactHeading: string;
-  contactDescription: string;
-  phone: string;
-  email: string;
-  address: string;
-  instagramUrl: string;
-  kakaoUrl: string;
+  contactHeading?: string;
+  contactDescription?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  instagramUrl?: string;
+  kakaoUrl?: string;
 };
 
 export type PortfolioItem = {
   _id: string;
   title: string;
   slug: string;
-  summary: string;
-  description: string;
-  shootDate: string;
-  location: string;
+  summary?: string;
+  description?: string;
+  shootDate?: string;
+  location?: string;
   mediaType: "photo" | "video";
   youtubeUrl?: string;
   coverImage?: SanityImage;
@@ -96,9 +97,9 @@ export type PortfolioItem = {
 export type PackagePlan = {
   _id: string;
   title: string;
-  price: string;
-  description: string;
-  features: string[];
+  price?: string;
+  description?: string;
+  features?: string[];
   note?: string;
   badge?: string;
   order?: number;

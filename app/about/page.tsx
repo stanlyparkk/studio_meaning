@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { PageIntro } from "@/components/ui/page-intro";
 import { PortableImage } from "@/components/ui/portable-image";
-import { getPortfolioItems, getSiteSettings } from "@/lib/sanity/fetchers";
+import { getSiteSettings } from "@/lib/sanity/fetchers";
 import { buildMetadata } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
@@ -12,14 +12,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function AboutPage() {
-  const [settings, portfolios] = await Promise.all([
-    getSiteSettings(),
-    getPortfolioItems(),
-  ]);
-
-  const highlighted = portfolios
-    .filter((item) => item.mediaType === "photo")
-    .slice(0, 2);
+  const settings = await getSiteSettings();
+  const aboutImages = settings.aboutImages || [];
   const aboutHighlights =
     settings.aboutHighlights?.filter((item) => item.text?.trim()) || [];
 
@@ -29,7 +23,7 @@ export default async function AboutPage() {
         <div>
           <PageIntro
             eyebrow="About"
-            title={settings.aboutTitle}
+            title={settings.aboutTitle || "About"}
             description={settings.aboutBody}
             noWrapDesktop={false}
           />
@@ -49,21 +43,23 @@ export default async function AboutPage() {
           ) : null}
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          {highlighted.map((item, index) => (
-            <PortableImage
-              key={item._id}
-              image={item.coverImage}
-              alt={item.title}
-              priority={index === 0}
-              className={
-                index === 0
-                  ? "h-[420px] sm:col-span-2 sm:h-[560px]"
-                  : "h-[320px] transition duration-500 hover:-translate-y-1"
-              }
-            />
-          ))}
-        </div>
+        {aboutImages.length ? (
+          <div className="grid gap-6 sm:grid-cols-2">
+            {aboutImages.map((image, index) => (
+              <PortableImage
+                key={`${image.asset?._ref || image.alt || "about-image"}-${index}`}
+                image={image}
+                alt={image.alt || `${settings.aboutTitle || "About"} image ${index + 1}`}
+                priority={index === 0}
+                className={
+                  index === 0
+                    ? "h-[420px] sm:col-span-2 sm:h-[560px]"
+                    : "h-[320px] transition duration-500 hover:-translate-y-1"
+                }
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );
