@@ -175,10 +175,6 @@ export function PortfolioBrowser({
           </div>
         </div>
 
-        <div className="mt-6 rounded-[1.5rem] border border-white/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.72),rgba(247,233,208,0.74))] px-5 py-4 text-sm text-stone/68">
-          현재 <span className="font-semibold text-stone">{filteredItems.length}</span>개의 포트폴리오가
-          선택 조건에 맞게 표시되고 있습니다.
-        </div>
       </div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
