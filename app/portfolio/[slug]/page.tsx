@@ -90,22 +90,28 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             />
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="space-y-6">
             <PortableImage
               image={item.coverImage}
               alt={item.title}
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="h-[420px] sm:col-span-2 sm:h-[680px]"
+              className={
+                item.gallery.length ? "h-[560px] sm:h-[760px]" : "h-[680px] sm:h-[860px]"
+              }
             />
-            {item.gallery.map((image, index) => (
-              <PortableImage
-                key={`${item._id}-${index}`}
-                image={image}
-                alt={`${item.title} gallery ${index + 1}`}
-                className={index % 3 === 0 ? "h-[420px] sm:col-span-2" : "h-[340px]"}
-              />
-            ))}
+            {item.gallery.length ? (
+              <div className="grid gap-6">
+                {item.gallery.map((image, index) => (
+                  <PortableImage
+                    key={`${item._id}-${index}`}
+                    image={image}
+                    alt={`${item.title} gallery ${index + 1}`}
+                    className="h-[520px] sm:h-[680px]"
+                  />
+                ))}
+              </div>
+            ) : null}
           </div>
         )}
       </div>
